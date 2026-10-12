@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Freedom Formulas | Just Sam Advice</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Inter:wght@400;600&display=swap">
+<style>
+:root{--navy:#14134B;--purple:#6A35D0;--pink:#E91E7A;--amber:#F5A623;--teal:#14D6B4;--bg:#F7F6FC;--card:#fff;--text:#14134B;--muted:#6b6a8a;--line:#e3e1f2;--inp:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d0c2b;--card:#17164a;--text:#f1f0fb;--muted:#a9a7cf;--line:#2c2a68;--inp:#0f0e36;--navy:#f1f0fb;--purple:#9b78f0}}
+:root[data-theme="dark"]{--bg:#0d0c2b;--card:#17164a;--text:#f1f0fb;--muted:#a9a7cf;--line:#2c2a68;--inp:#0f0e36;--navy:#f1f0fb;--purple:#9b78f0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.45}
+.wrap{max-width:640px;margin:0 auto;padding:20px 16px 40px}
+.brand{text-align:center;margin:8px 0 4px;font-family:Nunito,sans-serif}
+.brand small{display:block;letter-spacing:.6em;color:var(--purple);font-weight:800;font-size:11px;padding-left:.6em}
+.brand b{font-size:44px;font-weight:800;color:var(--navy);line-height:1}
+.dots{display:inline-flex;gap:4px;vertical-align:middle;margin-left:6px}
+.dots i{width:8px;height:8px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:var(--pink)}.dots i:nth-child(2){background:var(--amber)}.dots i:nth-child(3){background:var(--teal)}
+h1{font-family:Nunito,sans-serif;font-size:24px;text-align:center;margin:14px 0 2px}
+.sub{text-align:center;color:var(--muted);margin:0 0 18px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
+.card h2{font-family:Nunito,sans-serif;font-size:18px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+.card h2 span{width:10px;height:10px;border-radius:50%;display:inline-block}
+.hint{color:var(--muted);font-size:13px;margin:0 0 12px}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:10px 0 4px}
+.f{position:relative}
+.f em{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-style:normal;color:var(--muted)}
+.f em.r{left:auto;right:12px}
+input{width:100%;font:600 16px Inter,sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--inp);color:var(--text)}
+input.pre{padding-left:26px}input.suf{padding-right:34px}
+input:focus{outline:2px solid var(--purple);outline-offset:0}
+.res{margin-top:14px;padding:14px;border-radius:12px;background:linear-gradient(135deg,var(--navy),#3b2a9a);color:#fff}
+:root[data-theme="dark"] .res,:root:not([data-theme="light"]) .res{color:#fff}
+@media(prefers-color-scheme:dark){.res{background:linear-gradient(135deg,#2a1f8f,#5b2fc4)}}
+.res .big{font-family:Nunito,sans-serif;font-size:30px;font-weight:800;line-height:1.1}
+.res .lbl{font-size:12px;opacity:.8;text-transform:uppercase;letter-spacing:.08em}
+.mini{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+.mini div{font-size:13px}.mini b{display:block;font-size:16px}
+.bar{height:8px;background:rgba(255,255,255,.25);border-radius:6px;margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.note{display:none;margin-top:12px;padding:10px 12px;border-left:4px solid var(--purple);background:var(--bg);border-radius:8px;font-size:13px}.note.show{display:block}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;text-align:right;border-bottom:1px solid var(--line)}th:first-child,td:first-child{text-align:left}th{color:var(--muted);font-weight:600}tr.hit td{background:rgba(20,214,180,.2);font-weight:600}
+.foot{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><small>JUST</small><b>sam<span class="dots"><i></i><i></i><i></i></span></b><small>ADVICE</small></div>
+  <h1>Freedom Formulas</h1>
+  <p class="sub">Quick numbers for your path to financial independence.</p>
+
+  <div class="card">
+    <h2><span style="background:var(--pink)"></span>Your starting point</h2>
+    <p class="hint">Used by the calculators below.</p>
+    <div class="row">
+      <div><label for="nw">Invested net worth</label><div class="f"><em>$</em><input id="nw" class="pre" type="number" inputmode="decimal" value="50000"></div></div>
+      <div><label for="rate">Est. annual return</label><div class="f"><input id="rate" class="suf" type="number" inputmode="decimal" step="0.1" value="7"><em class="r">%</em></div></div>
+    </div>
+    <div class="note" id="ratenote"><b>Sam suggests:</b> Keep the interest rate around 7–8% as an inflation-adjusted number, a realistic representation of your buying power in the future.</div>
+  </div>
+
+  <div class="card">
+    <h2><span style="background:var(--amber)"></span>Your freedom number</h2>
+    <p class="hint" style="font-size:15px;color:var(--text)">How much would you like to live off each year when you're financially free?</p>
+    <div class="row">
+      <div><label for="spend">Per year, in today's dollars</label><div class="f"><em>$</em><input id="spend" class="pre" type="number" inputmode="decimal" value="60000"></div></div>
+      <input id="swr" type="hidden" value="4">
+    </div>
+    <div class="res">
+      <div class="lbl">Freedom number</div>
+      <div class="big" id="fn">$0</div>
+      <p id="swrtxt" style="margin:10px 0 0;font-size:14px"></p>
+      <div class="bar"><i id="prog"></i></div>
+      <div class="mini"><div id="progtxt" style="opacity:.85"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span style="background:var(--teal)"></span>Where will I be?</h2>
+    <p class="hint">Enter a monthly or yearly amount; the other updates automatically.</p>
+    <div class="row">
+      <div><label for="mc">Monthly contribution</label><div class="f"><em>$</em><input id="mc" class="pre" type="number" inputmode="decimal" value="1500"></div></div>
+      <div><label for="yc">Yearly contribution</label><div class="f"><em>$</em><input id="yc" class="pre" type="number" inputmode="decimal" value="18000"></div></div>
+    </div>
+    <label for="yrs">Length of time</label>
+    <div class="f"><input id="yrs" class="suf" type="number" inputmode="decimal" value="15"><em class="r" style="right:10px;font-size:12px">yrs</em></div>
+    <div class="res">
+      <div class="lbl">Projected balance</div>
+      <div class="big" id="fv">$0</div>
+      <div class="mini"><div>You contribute<b id="tc">$0</b></div><div>Growth<b id="gr">$0</b></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span style="background:var(--purple)"></span>Retire by…</h2>
+    <p class="hint">How much to save each month to hit your freedom number.</p>
+    <label for="ry">Years until retirement</label>
+    <div class="f"><input id="ry" class="suf" type="number" inputmode="decimal" value="20"><em class="r" style="right:10px;font-size:12px">yrs</em></div>
+    <div class="res">
+      <div class="lbl">You need to contribute</div>
+      <div class="big"><span id="rm">$0</span> <span style="font-size:14px;font-weight:600;opacity:.8">/ month</span></div>
+      <div class="mini"><div>Per year<b id="ryr">$0</b></div><div>Target<b id="rt">$0</b></div></div>
+      <div class="mini"><div id="rnote" style="opacity:.85"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span style="background:var(--navy)"></span>Year by year</h2>
+    <p class="hint">Based on your numbers above. The highlighted row is the year you reach your freedom number.</p>
+    <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Year</th><th>Contributed</th><th>Growth</th><th>Balance</th></tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <p class="foot">For education only, not financial advice. Returns are not guaranteed. Use an after-inflation return to see results in today's dollars.<br>justsamadvice.com</p>
+</div>
+<script>
+var $=function(i){return document.getElementById(i)};
+var money=function(n){return isFinite(n)?'$'+Math.round(n).toLocaleString('en-US'):'$0'};
+var num=function(i){var v=parseFloat($(i).value);return isFinite(v)?v:0};
+function fvOf(pv,pmt,yrs,rate){var r=rate/100/12,n=yrs*12;if(r===0)return pv+pmt*n;var g=Math.pow(1+r,n);return pv*g+pmt*(g-1)/r}
+function calc(){
+  var nw=num('nw'),rate=num('rate'),swr=num('swr');
+  var fn=swr>0?num('spend')/(swr/100):0;
+  $('fn').textContent=money(fn);
+  $('swrtxt').textContent='With a '+swr+'% safe withdrawal rate, you need '+(swr>0?(100/swr).toFixed(1).replace(/\.0$/,''):'—')+'× your yearly spending invested. Living off '+money(num('spend'))+' a year means '+money(fn)+'.';
+  
+  var p=fn>0?Math.min(100,nw/fn*100):0;
+  $('prog').style.width=p+'%';
+  $('progtxt').textContent=fn>0?'You are '+p.toFixed(1)+'% of the way there.':'';
+  var mc=num('mc'),yrs=num('yrs'),fv=fvOf(nw,mc,yrs,rate),tc=mc*12*yrs;
+  $('fv').textContent=money(fv);
+  $('tc').textContent=money(nw+tc);
+  $('gr').textContent=money(fv-nw-tc);
+  var tb=document.querySelector('#tbl tbody'),h='',bal=nw,rr=rate/100/12,hit=false;
+  for(var y=1;y<=Math.min(Math.floor(yrs),80);y++){var s=bal;for(var m=0;m<12;m++)bal=bal*(1+rr)+mc;var c=mc*12,g=bal-s-c,cls='';if(!hit&&fn>0&&bal>=fn){hit=true;cls=' class="hit"'}h+='<tr'+cls+'><td>'+y+'</td><td>'+money(c)+'</td><td>'+money(g)+'</td><td>'+money(bal)+'</td></tr>'}
+  tb.innerHTML=h;
+  var ry=num('ry'),r=rate/100/12,n=ry*12,need=fn-nw*(r===0?1:Math.pow(1+r,n)),pm;
+  if(n<=0)pm=0;else if(need<=0)pm=0;else pm=r===0?need/n:need*r/(Math.pow(1+r,n)-1);
+  $('rm').textContent=money(pm);
+  $('ryr').textContent=money(pm*12);
+  $('rt').textContent=money(fn);
+  $('rnote').textContent=(n>0&&need<=0)?'Your current balance alone grows past your target.':'';
+}
+$('mc').addEventListener('input',function(){$('yc').value=+(num('mc')*12).toFixed(2);calc()});
+$('yc').addEventListener('input',function(){$('mc').value=+(num('yc')/12).toFixed(2);calc()});
+$('rate').addEventListener('input',function(){$('ratenote').classList.add('show')});
+['nw','rate','spend','swr','yrs','ry'].forEach(function(i){$(i).addEventListener('input',calc)});
+calc();
+</script>
+</body>
+</html>
