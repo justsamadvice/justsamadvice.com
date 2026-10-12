@@ -47,6 +47,8 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;t
 .logo{display:flex;justify-content:center;margin:6px 0 4px}.logo img{height:96px;width:auto;background:#fff;border-radius:16px;padding:8px 22px;border:1px solid var(--line)}
 .chk{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--text);margin-top:14px;cursor:pointer}.chk input{width:20px;height:20px;padding:0;accent-color:var(--purple);flex:none}
 .ihint{display:none;margin-top:8px;font-size:12px;color:var(--muted)}.ihint.show{display:block}
+#chart text{fill:var(--muted);font-family:Inter,sans-serif}#chart text.fl{fill:#FF4FA7}#chart line.g{stroke:var(--line)}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:6px 0 14px}.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:20px}
 </style>
 </head>
@@ -60,7 +62,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;t
     <h2><span style="background:var(--pink)"></span>Your starting point</h2>
     <p class="hint">Used by the calculators below.</p>
     <div class="row">
-      <div><label for="nw">Invested net worth</label><div class="f"><em>$</em><input id="nw" class="pre" type="number" inputmode="decimal" value="50000"></div></div>
+      <div><label for="nw">Invested net worth</label><div class="f"><em>$</em><input id="nw" class="pre" type="text" inputmode="decimal" value="50,000"></div></div>
       <div><label for="rate">Est. annual return</label><div class="f"><input id="rate" class="suf" type="number" inputmode="decimal" step="0.1" value="7"><em class="r">%</em></div></div>
     </div>
     <label class="chk"><input type="checkbox" id="infl" checked> Adjust for inflation (today's dollars)</label>
@@ -72,8 +74,8 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;t
     <h2><span style="background:var(--amber)"></span>Your freedom number</h2>
     <p class="hint" style="font-size:15px;color:var(--text)">How much would you like to live off when you're financially free? Enter a monthly or yearly amount.</p>
     <div class="row">
-      <div><label for="smo">Per month</label><div class="f"><em>$</em><input id="smo" class="pre" type="number" inputmode="decimal" value="5000"></div></div>
-      <div><label for="spend">Per year</label><div class="f"><em>$</em><input id="spend" class="pre" type="number" inputmode="decimal" value="60000"></div></div>
+      <div><label for="smo">Per month</label><div class="f"><em>$</em><input id="smo" class="pre" type="text" inputmode="decimal" value="5,000"></div></div>
+      <div><label for="spend">Per year</label><div class="f"><em>$</em><input id="spend" class="pre" type="text" inputmode="decimal" value="60,000"></div></div>
       <input id="swr" type="hidden" value="4">
     </div>
     <div class="res">
@@ -86,24 +88,10 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;t
   </div>
 
   <div class="card">
-    <h2><span style="background:var(--teal)"></span>Where will I be?</h2>
-    <p class="hint">Enter a monthly or yearly amount; the other updates automatically.</p>
-    <div class="row">
-      <div><label for="mc">Monthly contribution</label><div class="f"><em>$</em><input id="mc" class="pre" type="number" inputmode="decimal" value="1500"></div></div>
-      <div><label for="yc">Yearly contribution</label><div class="f"><em>$</em><input id="yc" class="pre" type="number" inputmode="decimal" value="18000"></div></div>
-    </div>
-    <label for="yrs">Length of time</label>
-    <div class="f"><input id="yrs" class="suf" type="number" inputmode="decimal" value="15"><em class="r" style="right:10px;font-size:12px">yrs</em></div>
-    <div class="res">
-      <div class="lbl">Projected balance</div>
-      <div class="big" id="fv">$0</div>
-      <div class="mini"><div>You contribute<b id="tc">$0</b></div><div>Growth<b id="gr">$0</b></div></div>
-    </div>
-  </div>
-
-  <div class="card">
     <h2><span style="background:var(--purple)"></span>Retire by…</h2>
     <p class="hint">How much to save each month to hit your freedom number.</p>
+    <div class="row"><div><label for="age">I am</label><div class="f"><input id="age" class="suf" style="padding-right:66px" type="number" inputmode="decimal" value="32"><em class="r" style="right:10px;font-size:12px">yrs old</em></div></div>
+      <div><label for="rage">Retire at</label><div class="f"><input id="rage" class="suf" style="padding-right:66px" type="number" inputmode="decimal" value="52"><em class="r" style="right:10px;font-size:12px">yrs old</em></div></div></div>
     <label for="ry">Years until retirement</label>
     <div class="f"><input id="ry" class="suf" type="number" inputmode="decimal" value="20"><em class="r" style="right:10px;font-size:12px">yrs</em></div>
     <div class="res">
@@ -115,8 +103,26 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;t
   </div>
 
   <div class="card">
+    <h2><span style="background:var(--teal)"></span>Where will I be?</h2>
+    <p class="hint">Starts with the monthly amount and timeline you need to reach your freedom number. Change either one to test your own plan. <a href="#" id="rst" style="display:none;color:var(--purple);font-weight:600">Reset to required plan</a></p>
+    <div class="row">
+      <div><label for="mc">Monthly contribution</label><div class="f"><em>$</em><input id="mc" class="pre" type="text" inputmode="decimal" value="1,500"></div></div>
+      <div><label for="yc">Yearly contribution</label><div class="f"><em>$</em><input id="yc" class="pre" type="text" inputmode="decimal" value="18,000"></div></div>
+    </div>
+    <label for="yrs">Length of time</label>
+    <div class="f"><input id="yrs" class="suf" type="number" inputmode="decimal" value="15"><em class="r" style="right:10px;font-size:12px">yrs</em></div>
+    <div class="res">
+      <div class="lbl">Projected balance</div>
+      <div class="big" id="fv">$0</div>
+      <div class="mini"><div>You contribute<b id="tc">$0</b></div><div>Growth<b id="gr">$0</b></div></div>
+    </div>
+  </div>
+
+  <div class="card">
     <h2><span style="background:var(--navy)"></span>Year by year</h2>
     <p class="hint">Based on your numbers above. The highlighted row is the year you reach your freedom number.</p>
+    <div id="chart"></div>
+    <div class="leg"><span><i style="background:#7131FF"></i>Your contributions</span><span><i style="background:#04FFF7"></i>Growth</span><span><i style="background:#FF4FA7"></i>Freedom number</span></div>
     <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Year</th><th>Contributed</th><th>Growth</th><th>Balance</th></tr></thead><tbody></tbody></table></div>
   </div>
 
@@ -125,8 +131,26 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;t
 <script>
 var $=function(i){return document.getElementById(i)};
 var money=function(n){return isFinite(n)?'$'+Math.round(n).toLocaleString('en-US'):'$0'};
-var num=function(i){var v=parseFloat($(i).value);return isFinite(v)?v:0};
+var num=function(i){var v=parseFloat(String($(i).value).replace(/,/g,''));return isFinite(v)?v:0};
 function fvOf(pv,pmt,yrs,rate){var r=rate/100/12,n=yrs*12;if(r===0)return pv+pmt*n;var g=Math.pow(1+r,n);return pv*g+pmt*(g-1)/r}
+var userMc=false,userYrs=false;
+function setM(id,v){var n=Math.round(v*100)/100;$(id).value=isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:2}):''}
+function fmtInput(e){var el=e.target,v=el.value,pos=el.selectionStart,d=v.slice(0,pos).replace(/[^0-9.]/g,'').length,raw=v.replace(/[^0-9.]/g,''),p=raw.split('.'),ip=p[0].replace(/^0+(?=\d)/,''),out=ip.replace(/\B(?=(\d{3})+(?!\d))/g,',');if(p.length>1)out+='.'+p.slice(1).join('').slice(0,2);el.value=out;var c=0,i=0;for(;i<out.length&&c<d;i++){if(/[0-9.]/.test(out[i]))c++}try{el.setSelectionRange(i,i)}catch(x){}}
+['nw','spend','smo','mc','yc'].forEach(function(i){$(i).addEventListener('input',fmtInput)});
+$('yrs').addEventListener('input',function(){userYrs=true});
+$('rst').addEventListener('click',function(e){e.preventDefault();userMc=false;userYrs=false;calc()});
+function short(n){var a=Math.abs(n);return a>=1e9?'$'+(n/1e9).toFixed(1)+'B':a>=1e6?'$'+(n/1e6).toFixed(1)+'M':a>=1e3?'$'+Math.round(n/1e3)+'K':'$'+Math.round(n)}
+function drawChart(rows,fn,nw,mc){
+  var el=$('chart');if(!rows.length){el.innerHTML='';return}
+  var W=600,H=280,L=52,R=10,T=12,B=28,n=rows.length,max=Math.max.apply(null,rows);if(fn>0)max=Math.max(max,fn);max*=1.08;if(max<=0)max=1;
+  var bw=(W-L-R)/n,s='',ph=H-T-B;
+  for(var i=0;i<=4;i++){var y=T+ph*(1-i/4);s+='<line class="g" x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'"/><text x="'+(L-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10">'+short(max*i/4)+'</text>'}
+  rows.forEach(function(b,i){var c=Math.max(0,Math.min(b,nw+mc*12*(i+1))),x=L+i*bw+bw*.12,w=bw*.76,hc=ph*c/max,hg=Math.max(0,ph*(b-c)/max),yb=H-B;
+    s+='<rect x="'+x+'" y="'+(yb-hc)+'" width="'+w+'" height="'+hc+'" fill="#7131FF"/><rect x="'+x+'" y="'+(yb-hc-hg)+'" width="'+w+'" height="'+hg+'" fill="#04FFF7"/>';
+    if(n<=12||(i+1)%Math.ceil(n/10)===0||i===n-1)s+='<text x="'+(x+w/2)+'" y="'+(H-10)+'" text-anchor="middle" font-size="10">'+(i+1)+'</text>'});
+  if(fn>0){var fy=T+ph*(1-fn/max);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+fy+'" y2="'+fy+'" stroke="#FF4FA7" stroke-width="2" stroke-dasharray="6 4"/><text class="fl" x="'+(L+6)+'" y="'+(fy-5)+'" font-size="11" font-weight="600">Freedom number</text>'}
+  el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Balance by year">'+s+'<text x="'+(W/2)+'" y="'+(H)+'" text-anchor="middle" font-size="9">Year</text></svg>'
+}
 function calc(){
   var nw=num('nw'),rate=num('rate'),swr=num('swr');
   var fn=swr>0?num('spend')/(swr/100):0;
@@ -136,24 +160,32 @@ function calc(){
   var p=fn>0?Math.min(100,nw/fn*100):0;
   $('prog').style.width=p+'%';
   $('progtxt').textContent=fn>0?'You are '+p.toFixed(1)+'% of the way there.':'';
+  var ry0=num('ry'),r0=rate/100/12,n0=ry0*12,need0=fn-nw*(r0===0?1:Math.pow(1+r0,n0)),pm0=(n0<=0||need0<=0)?0:(r0===0?need0/n0:need0*r0/(Math.pow(1+r0,n0)-1));
+  if(!userMc){setM('mc',Math.ceil(pm0));setM('yc',Math.ceil(pm0)*12)}
+  if(!userYrs)$('yrs').value=ry0;
+  $('rst').style.display=(userMc||userYrs)?'inline':'none';
   var mc=num('mc'),yrs=num('yrs'),fv=fvOf(nw,mc,yrs,rate),tc=mc*12*yrs;
   $('fv').textContent=money(fv);
   $('tc').textContent=money(nw+tc);
   $('gr').textContent=money(fv-nw-tc);
-  var tb=document.querySelector('#tbl tbody'),h='',bal=nw,rr=rate/100/12,hit=false;
-  for(var y=1;y<=Math.min(Math.floor(yrs),80);y++){var s=bal;for(var m=0;m<12;m++)bal=bal*(1+rr)+mc;var c=mc*12,g=bal-s-c,cls='';if(!hit&&fn>0&&bal>=fn){hit=true;cls=' class="hit"'}h+='<tr'+cls+'><td>'+y+'</td><td>'+money(c)+'</td><td>'+money(g)+'</td><td>'+money(bal)+'</td></tr>'}
-  tb.innerHTML=h;
+  var tb=document.querySelector('#tbl tbody'),h='',bal=nw,rr=rate/100/12,hit=false,rows=[];
+  for(var y=1;y<=Math.min(Math.floor(yrs),80);y++){var s=bal;for(var m=0;m<12;m++)bal=bal*(1+rr)+mc;var c=mc*12,g=bal-s-c,cls='';if(!hit&&fn>0&&bal>=fn){hit=true;cls=' class="hit"'}rows.push(bal);h+='<tr'+cls+'><td>'+y+'</td><td>'+money(c)+'</td><td>'+money(g)+'</td><td>'+money(bal)+'</td></tr>'}
+  tb.innerHTML=h;drawChart(rows,fn,nw,mc);
   var ry=num('ry'),r=rate/100/12,n=ry*12,need=fn-nw*(r===0?1:Math.pow(1+r,n)),pm;
   if(n<=0)pm=0;else if(need<=0)pm=0;else pm=r===0?need/n:need*r/(Math.pow(1+r,n)-1);
-  $('rm').textContent=money(pm);
-  $('ryr').textContent=money(pm*12);
+  $('rm').textContent=money(Math.ceil(pm));
+  $('ryr').textContent=money(Math.ceil(pm)*12);
   $('rt').textContent=money(fn);
   $('rnote').textContent=(n>0&&need<=0)?'Your current balance alone grows past your target.':'';
 }
-$('smo').addEventListener('input',function(){$('spend').value=+(num('smo')*12).toFixed(2);calc()});
-$('spend').addEventListener('input',function(){$('smo').value=+(num('spend')/12).toFixed(2);calc()});
-$('mc').addEventListener('input',function(){$('yc').value=+(num('mc')*12).toFixed(2);calc()});
-$('yc').addEventListener('input',function(){$('mc').value=+(num('yc')/12).toFixed(2);calc()});
+function syncYrs(){$('ry').value=Math.max(0,+(num('rage')-num('age')).toFixed(2));calc()}
+$('age').addEventListener('input',syncYrs);
+$('rage').addEventListener('input',syncYrs);
+$('ry').addEventListener('input',function(){$('rage').value=+(num('age')+num('ry')).toFixed(2);calc()});
+$('smo').addEventListener('input',function(){setM('spend',num('smo')*12);calc()});
+$('spend').addEventListener('input',function(){setM('smo',num('spend')/12);calc()});
+$('mc').addEventListener('input',function(){userMc=true;setM('yc',num('mc')*12);calc()});
+$('yc').addEventListener('input',function(){userMc=true;setM('mc',num('yc')/12);calc()});
 $('rate').addEventListener('input',function(){$('ratenote').classList.add('show')});
 $('infl').addEventListener('change',function(){$('rate').value=+(num('rate')+(this.checked?-3:3)).toFixed(2);$('ihint').classList.toggle('show',!this.checked);calc()});
 ['nw','rate','spend','swr','yrs','ry'].forEach(function(i){$(i).addEventListener('input',calc)});
